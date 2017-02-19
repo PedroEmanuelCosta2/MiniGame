@@ -7,7 +7,6 @@ package minigame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -16,6 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 import specifications.Spec;
@@ -171,14 +172,13 @@ public class JPanel extends javax.swing.JPanel implements ActionListener, Spec {
     }
 
     private void paintVaisseau(Graphics g) {
-        Image image = null;
+        
         try {
-            File input = new File("C:\\!HE-ARC\\2eme annee\\Maison_Java\\MiniGame\\src\\images\\vaisseau.jpg");
-            image = ImageIO.read(input);
+            BufferedImage img = ImageIO.read(new File("src/images/vaisseau.jpg"));            
+            g.drawImage(img, vaisseau.getX(), vaisseau.getY(), vaisseau.getWidth(), vaisseau.getHeight(), this);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        g.drawImage(image, vaisseau.getX(), vaisseau.getY(), vaisseau.getWidth(), vaisseau.getHeight(), this);
     }
 
     private void paintAsteroides(Graphics g) {
